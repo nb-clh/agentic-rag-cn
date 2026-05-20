@@ -1,0 +1,10 @@
+.git
+__pycache__
+*.pyc
+.env
+*.md
+!README.md
+LICENSE
+.gitignore
+searxng/
+.github/

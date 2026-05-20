@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  # --- SearXNG 元搜索引擎 ---
+  searxng:
+    image: searxng/searxng:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - searxng-data:/etc/searxng
+      - ./searxng/settings.yml:/etc/searxng/settings.yml:ro
+    environment:
+      - SEARXNG_BASE_URL=http://localhost:8080/
+    restart: unless-stopped
+
+  # --- Redis 缓存 ---
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+
+  # --- API 服务 ---
+  api:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - LLM_MODEL=${LLM_MODEL}
+      - SEARXNG_URL=http://searxng:8080
+      - HF_ENDPOINT=${HF_ENDPOINT:-https://hf-mirror.com}
+      - FAISS_INDEX_PATH=/app/data/faiss.index
+    depends_on:
+      - redis
+      - searxng
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+  searxng-data:

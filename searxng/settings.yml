@@ -1,0 +1,66 @@
+# SearXNG Settings for Agentic RAG-CN
+# 此文件配置了项目所需的 7 个搜索引擎
+# 用户 clone 后 docker compose up 即可使用，无需手动配置
+
+use_default_settings: true
+
+search:
+  default_lang: "zh-CN"
+  formats:
+    - html
+    - json
+
+server:
+  secret_key: "agentic-rag-cn-searxng-secret"
+  limiter: false
+  image_proxy: false
+
+engines:
+  # --- 启用的引擎 ---
+  - name: baidu
+    engine: baidu
+    shortcut: bd
+    disabled: false
+
+  - name: bing
+    engine: bing
+    shortcut: bing
+    disabled: false
+
+  - name: sogou
+    engine: sogou
+    shortcut: sg
+    disabled: false
+
+  - name: quark
+    engine: quark
+    shortcut: qk
+    disabled: false
+
+  - name: chinaso
+    engine: chinaso
+    shortcut: cs
+    disabled: false
+
+  - name: wechat
+    engine: wechat
+    shortcut: wx
+    disabled: false
+
+  - name: yandex
+    engine: yandex
+    shortcut: yx
+    disabled: false
+
+  # --- 禁用的引擎 ---
+  - name: duckduckgo
+    engine: duckduckgo
+    disabled: true
+
+  - name: 360search
+    engine: 360search
+    disabled: true
+
+  - name: google
+    engine: google
+    disabled: true

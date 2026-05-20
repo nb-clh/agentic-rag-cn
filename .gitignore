@@ -1,0 +1,43 @@
+# Environment variables (contains API keys)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+docker-compose.override.yml
+
+# Models and data
+*.bin
+*.pt
+*.onnx
+faiss.index
+faiss.index.idmapping
+
+# Redis
+dump.rdb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+BLUEPRINT_GAPS.md
+DOCS_BRIEFING.md
+PROJECT_KNOWLEDGE.md
+PROJECT_STATUS.md
+EXPLAIN.md
